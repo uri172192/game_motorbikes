@@ -23,7 +23,6 @@ def normalitza(text):
 # -------------------------
 
 pilots = pd.read_csv("pilots.csv")
-pilots.columns = pilots.columns.str.strip()
 
 
 index = dia_del_joc().toordinal() % len(pilots)
@@ -42,7 +41,11 @@ if "encertat" not in st.session_state:
 
 st.title("🏍️ Pilot del dia")
 
-st.image(f"images/{pilot_dia['image']}", use_container_width=True)
+st.image(
+    os.path.join(BASE_DIR, "Fotos", pilot_dia.iloc[2]),
+    use_container_width=True
+)
+
 
 if st.session_state.encertat:
     st.success("🏁 Ja has resolt el repte d’avui. Torna demà!")
@@ -59,5 +62,6 @@ if guess:
         st.stop()
     else:
         st.error("❌ No és correcte, torna-ho a provar!")
+
 
 
