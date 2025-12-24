@@ -46,7 +46,7 @@ if "encertat" not in st.session_state:
 st.title("🏍️ Pilot del dia")
 
 st.image(
-    os.path.join(BASE_DIR, "Fotos", pilot_dia.iloc[2]),
+    os.path.join(BASE_DIR, "Fotos", pilot_dia["image"]),
     use_container_width=True
 )
 
@@ -67,6 +67,9 @@ if guess:
     else:
         st.error("❌ No és correcte, torna-ho a provar!")
 
+
+st.write(pilots.head())
+st.write(pilot_dia)
 
 
 
