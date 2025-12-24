@@ -3,9 +3,8 @@ import pandas as pd
 from datetime import datetime, timedelta
 import unicodedata
 import os
-import os
-BASE_DIR = os.path.dirname(os.path.abspath(game_motorbikes/Fotos))
 
+BASE_DIR = os.getcwd()  # directori base per Streamlit
 
 # -------------------------
 # Funcions
@@ -27,8 +26,6 @@ def normalitza(text):
 # -------------------------
 
 pilots = pd.read_csv("pilots.csv")
-
-
 index = dia_del_joc().toordinal() % len(pilots)
 pilot_dia = pilots.iloc[index]
 
@@ -46,34 +43,6 @@ if "encertat" not in st.session_state:
 st.title("🏍️ Pilot del dia")
 
 st.image(
-    os.path.join(BASE_DIR, "Fotos", pilot_dia["image"]),
+    os.path.join(BASE_DIR, "Fotos", pilot_dia["image"]),  # usar nom de columna
     use_container_width=True
 )
-
-
-if st.session_state.encertat:
-    st.success("🏁 Ja has resolt el repte d’avui. Torna demà!")
-    st.info("⏰ El proper pilot apareixerà demà a les 8:00")
-    st.stop()
-
-guess = st.text_input("Quin pilot és?")
-
-if guess:
-    if normalitza(guess) == normalitza(pilot_dia["name"]):
-        st.session_state.encertat = True
-        st.success("✅ Correcte! Has encertat el pilot del dia!")
-        st.balloons()
-        st.stop()
-    else:
-        st.error("❌ No és correcte, torna-ho a provar!")
-
-
-st.write(pilots.head())
-st.write(pilot_dia)
-
-
-
-
-
-
-
