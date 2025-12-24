@@ -3,6 +3,9 @@ import pandas as pd
 from datetime import datetime, timedelta
 import unicodedata
 import os
+import os
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
 
 # -------------------------
 # Funcions
@@ -63,6 +66,7 @@ if guess:
         st.stop()
     else:
         st.error("❌ No és correcte, torna-ho a provar!")
+
 
 
 
