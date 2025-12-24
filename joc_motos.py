@@ -43,7 +43,7 @@ if "encertat" not in st.session_state:
 if len(pilots) == 0:
     st.error("Error: pilots.csv està buit o no s'ha trobat.")
 else:
-    st.title("🏍️Pilot del dia🎁 -​ 🎄Repte del Tió Esportiu 2025🎗️")
+    st.title("🏍️ Pilot del dia 🎁 -​ 🎄 Repte del Tió Esportiu 2025 🎗️")
     st.image(
         os.path.join(BASE_DIR, "Fotos", pilot_dia["image"]),
         use_container_width=True
@@ -58,6 +58,7 @@ else:
             st.stop()
         else:
             st.error("❌ No és correcte, torna-ho a provar!")
+
 
 
 
