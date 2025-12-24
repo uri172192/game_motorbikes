@@ -24,8 +24,8 @@ def normalitza(text):
 # Carregar dades
 # -------------------------
 pilots = pd.read_csv("pilots.csv", sep=";")
-st.write("Columnes del CSV:", pilots.columns)
-st.write("Primeres files:", pilots.head())
+#st.write("Columnes del CSV:", pilots.columns)
+#st.write("Primeres files:", pilots.head())
 
 index = dia_del_joc().toordinal() % len(pilots)
 pilot_dia = pilots.iloc[index]
@@ -57,3 +57,4 @@ else:
             st.stop()
         else:
             st.error("❌ No és correcte, torna-ho a provar!")
+
