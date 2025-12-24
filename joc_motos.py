@@ -26,6 +26,8 @@ def normalitza(text):
 # -------------------------
 
 pilots = pd.read_csv("pilots.csv")
+st.write("Columnes del CSV:", pilots.columns)
+st.write("Primeres files:", pilots.head())
 index = dia_del_joc().toordinal() % len(pilots)
 pilot_dia = pilots.iloc[index]
 
@@ -52,5 +54,6 @@ else:
         os.path.join(BASE_DIR, "Fotos", pilot_dia["image"]),
         use_container_width=True
     )
+
 
 
