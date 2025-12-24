@@ -23,6 +23,8 @@ def normalitza(text):
 # -------------------------
 
 pilots = pd.read_csv("pilots.csv")
+pilots.columns = pilots.columns.str.strip()
+
 
 index = dia_del_joc().toordinal() % len(pilots)
 pilot_dia = pilots.iloc[index]
@@ -57,4 +59,5 @@ if guess:
         st.stop()
     else:
         st.error("❌ No és correcte, torna-ho a provar!")
+
 
