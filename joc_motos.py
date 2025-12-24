@@ -40,9 +40,17 @@ if "encertat" not in st.session_state:
 # UI
 # -------------------------
 
-st.title("🏍️ Pilot del dia")
+# Comprova que hi ha pilots carregats
+if len(pilots) == 0:
+    st.error("Error: pilots.csv està buit o no s'ha trobat.")
+else:
+    index = dia_del_joc().toordinal() % len(pilots)
+    pilot_dia = pilots.iloc[index]
 
-st.image(
-    os.path.join(BASE_DIR, "Fotos", pilot_dia["image"]),  # usar nom de columna
-    use_container_width=True
-)
+    st.title("🏍️ Pilot del dia")
+    st.image(
+        os.path.join(BASE_DIR, "Fotos", pilot_dia["image"]),
+        use_container_width=True
+    )
+
+
