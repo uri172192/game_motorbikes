@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 from datetime import datetime, timedelta
 import unicodedata
+import os
 
 # -------------------------
 # Funcions
@@ -62,6 +63,7 @@ if guess:
         st.stop()
     else:
         st.error("❌ No és correcte, torna-ho a provar!")
+
 
 
 
