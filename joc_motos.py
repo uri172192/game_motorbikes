@@ -6,7 +6,7 @@ import os
 
 BASE_DIR = os.getcwd()  # Directori base per Streamlit
 
-st.set_page_config(page_title="Joc Motos 2025", layout="wide")
+st.set_page_config(page_title="Joc Motos 2025")
 # -------------------------
 # Funcions
 # -------------------------
@@ -58,6 +58,7 @@ else:
             st.stop()
         else:
             st.error("❌ No és correcte, torna-ho a provar!")
+
 
 
 
