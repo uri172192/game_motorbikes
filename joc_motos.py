@@ -37,6 +37,9 @@ pilot_dia = pilots.iloc[index]
 if "encertat" not in st.session_state:
     st.session_state.encertat = False
 
+if "mostrar_resposta" not in st.session_state:
+    st.session_state.mostrar_resposta = False
+
 # -------------------------
 # UI
 # -------------------------
@@ -58,6 +61,18 @@ else:
             st.stop()
         else:
             st.error("❌ No és correcte, torna-ho a provar!")
+    
+    if st.button("👀 Mostrar la resposta"):
+    st.session_state.mostrar_resposta = True
+    
+    if st.session_state.mostrar_resposta:
+    st.info(f"🧠 La resposta correcta és: **{pilot_dia['name']}**")
+    
+    st.session_state.mostrar_resposta = False
+
+
+
+
 
 
 
