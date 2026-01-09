@@ -62,12 +62,13 @@ else:
         else:
             st.error("❌ No és correcte, torna-ho a provar!")
     
-if st.button("Et rendeixes 👀 Mostrar la resposta"):
+if st.button("👀 Mostrar la resposta"):
     st.session_state.mostrar_resposta = True
     
 if st.session_state.mostrar_resposta:
     st.info(f"🧠 La resposta correcta és: **{pilot_dia['name']}**")
     
     st.session_state.mostrar_resposta = False
+
 
 
