@@ -52,7 +52,7 @@ else:
         use_container_width=True
     )
 
-    guess = st.text_input("Quin pilot és?")
+    guess = st.text_input("🔎​ Quin pilot és?")
     if guess:
         if normalitza(guess) == normalitza(pilot_dia["name"]):
             st.session_state.encertat = True
@@ -69,6 +69,7 @@ if st.session_state.mostrar_resposta:
     st.info(f"🧠 La resposta correcta és: **{pilot_dia['name']}**")
     
     st.session_state.mostrar_resposta = False
+
 
 
 
