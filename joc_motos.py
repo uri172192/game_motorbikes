@@ -64,6 +64,9 @@ lang_display = st.selectbox(
 # Update session state based on selection.
 st.session_state.lang = translations[st.session_state.lang]['language_options'][lang_display]
 
+# Update page title dynamically (optional, as it's set once at the top).
+#st.set_page_config(page_title=translations[st.session_state.lang]['page_title'])
+
 # -------------------------
 # Funcions
 # -------------------------
@@ -84,7 +87,7 @@ def normalitza(text):
 pilots = pd.read_csv(BASE_DIR / "pilots.csv", sep=";")
 
 if len(pilots) == 0:
-    st.error("Error: pilots.csv està buit o no s'ha trobat.")
+    st.error(translations[st.session_state.lang]['error_empty_csv'])
     st.stop()
 
 index = dia_del_joc().toordinal() % len(pilots)
@@ -102,30 +105,30 @@ if "mostrar_resposta" not in st.session_state:
 # -------------------------
 # UI
 # -------------------------
-st.title("🏍️ Repte Pilot del dia")
+st.title(translations[st.session_state.lang]['title'])
 
 image_path = BASE_DIR / "Fotos" / pilot_dia["image"]
+print(f"Camí de la imatge: {image_path}")  # Afegeix això per depurar
 
 if image_path.exists():
-    st.image(image_path, use_container_width=True)
+    st.image(str(image_path))
 else:
-    st.error(f"❌ No s'ha trobat la imatge: {pilot_dia['image']}")
-    st.write("Ruta intentada:", image_path)
+    st.error(translations[st.session_state.lang]['error_image_not_found'].format(image=pilot_dia['image']))
+    st.write(translations[st.session_state.lang]['image_path_attempted'], image_path)
 
-guess = st.text_input("🔎 Quin pilot és?")
+guess = st.text_input(translations[st.session_state.lang]['guess_placeholder'])
 if guess:
     if normalitza(guess) == normalitza(pilot_dia["name"]):
         st.session_state.encertat = True
-        st.success("✅ Correcte! Has encertat el pilot del dia!")
+        st.success(translations[st.session_state.lang]['success_message'])
         st.balloons()
         st.stop()
     else:
-        st.error("❌ No és correcte, torna-ho a provar!")
+        st.error(translations[st.session_state.lang]['error_wrong_guess'])
 
-if st.button("👀 Mostrar la resposta"):
+if st.button(translations[st.session_state.lang]['show_answer_button']):
     st.session_state.mostrar_resposta = True
 
 if st.session_state.mostrar_resposta:
-    st.info(f"🧠 La resposta correcta és: **{pilot_dia['name']}**")
+    st.info(translations[st.session_state.lang]['answer_reveal'].format(name=pilot_dia['name']))
     st.session_state.mostrar_resposta = False
-
