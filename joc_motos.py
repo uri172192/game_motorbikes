@@ -12,6 +12,59 @@ st.set_page_config(page_title="Pilot de Motos del Dia")
 BASE_DIR = Path(__file__).parent
 
 # -------------------------
+# NEW: Translations Dictionary
+# -------------------------
+# Define translations for each language. Keys match UI elements.
+# Add more languages by adding new top-level keys (e.g., 'es' for Spanish).
+translations = {
+    'ca': {  # Catalan (original)
+        'page_title': "Pilot de Motos del Dia",
+        'title': "🏍️ Repte Pilot del dia",
+        'language_label': "Idioma",
+        'language_options': {"Català": "ca", "English": "en"},
+        'error_empty_csv': "Error: pilots.csv està buit o no s'ha trobat.",
+        'error_image_not_found': "❌ No s'ha trobat la imatge: {image}",
+        'image_path_attempted': "Ruta intentada:",
+        'guess_placeholder': "🔎 Quin pilot és?",
+        'success_message': "✅ Correcte! Has encertat el pilot del dia!",
+        'error_wrong_guess': "❌ No és correcte, torna-ho a provar!",
+        'show_answer_button': "👀 Mostrar la resposta",
+        'answer_reveal': "🧠 La resposta correcta és: **{name}**",
+    },
+    'en': {  # English
+        'page_title': "Daily Motorcycle Pilot",
+        'title': "🏍️ Daily Pilot Challenge",
+        'language_label': "Language",
+        'language_options': {"Català": "ca", "English": "en"},
+        'error_empty_csv': "Error: pilots.csv is empty or not found.",
+        'error_image_not_found': "❌ Image not found: {image}",
+        'image_path_attempted': "Attempted path:",
+        'guess_placeholder': "🔎 Which pilot is it?",
+        'success_message': "✅ Correct! You've guessed today's pilot!",
+        'error_wrong_guess': "❌ Incorrect, try again!",
+        'show_answer_button': "👀 Show the answer",
+        'answer_reveal': "🧠 The correct answer is: **{name}**",
+    }
+}
+
+# -------------------------
+# NEW: Language Selection
+# -------------------------
+# Initialize language in session state if not set (default to Catalan).
+if "lang" not in st.session_state:
+    st.session_state.lang = "ca"
+
+# Language selector at the top (before other UI).
+lang_display = st.selectbox(
+    translations[st.session_state.lang]['language_label'],
+    options=list(translations[st.session_state.lang]['language_options'].keys()),
+    index=0 if st.session_state.lang == "ca" else 1,  # Default to Catalan
+    key="lang_selector"
+)
+# Update session state based on selection.
+st.session_state.lang = translations[st.session_state.lang]['language_options'][lang_display]
+
+# -------------------------
 # Funcions
 # -------------------------
 def dia_del_joc():
@@ -75,3 +128,4 @@ if st.button("👀 Mostrar la resposta"):
 if st.session_state.mostrar_resposta:
     st.info(f"🧠 La resposta correcta és: **{pilot_dia['name']}**")
     st.session_state.mostrar_resposta = False
+
