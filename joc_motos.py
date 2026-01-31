@@ -33,13 +33,13 @@ translations = {
     },
     'en': {  # English
         'page_title': "Daily Motorcycle Pilot",
-        'title': "🏍️ Daily Pilot Challenge",
+        'title': "🏍️ Daily Rider Challenge",
         'language_label': "🌐​Language",
         'language_options': {"Català": "ca", "English": "en"},
         'error_empty_csv': "Error: pilots.csv is empty or not found.",
         'error_image_not_found': "❌ Image not found: {image}",
         'image_path_attempted': "Attempted path:",
-        'guess_placeholder': "🔎 Which pilot is it?",
+        'guess_placeholder': "🔎 Which rider is it?",
         'success_message': "✅ Correct! You've guessed today's pilot!",
         'error_wrong_guess': "❌ Incorrect, try again!",
         'show_answer_button': "👀 Show the answer",
@@ -132,4 +132,5 @@ if st.button(translations[st.session_state.lang]['show_answer_button']):
 if st.session_state.mostrar_resposta:
     st.info(translations[st.session_state.lang]['answer_reveal'].format(name=pilot_dia['name']))
     st.session_state.mostrar_resposta = False
+
 
