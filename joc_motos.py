@@ -12,7 +12,7 @@ st.set_page_config(page_title="Pilot de Motos del Dia")
 BASE_DIR = Path(__file__).parent
 
 # -------------------------
-# NEW: Translations Dictionary
+# Traducció Diccionari
 # -------------------------
 # Define translations for each language. Keys match UI elements.
 # Add more languages by adding new top-level keys (e.g., 'es' for Spanish).
@@ -48,7 +48,7 @@ translations = {
 }
 
 # -------------------------
-# NEW: Language Selection
+# Selecció Idioma
 # -------------------------
 # Initialize language in session state if not set (default to Catalan).
 if "lang" not in st.session_state:
@@ -108,7 +108,7 @@ if "mostrar_resposta" not in st.session_state:
 st.title(translations[st.session_state.lang]['title'])
 
 image_path = BASE_DIR / "Fotos" / pilot_dia["image"]
-print(f"Camí de la imatge: {image_path}")  # Afegeix això per depurar
+#print(f"Camí de la imatge: {image_path}")  # Afegeix això per depurar
 
 if image_path.exists():
     st.image(image_path, use_container_width=True)
@@ -132,6 +132,7 @@ if st.button(translations[st.session_state.lang]['show_answer_button']):
 if st.session_state.mostrar_resposta:
     st.info(translations[st.session_state.lang]['answer_reveal'].format(name=pilot_dia['name']))
     st.session_state.mostrar_resposta = False
+
 
 
 
