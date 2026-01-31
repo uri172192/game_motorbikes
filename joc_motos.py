@@ -111,7 +111,7 @@ image_path = BASE_DIR / "Fotos" / pilot_dia["image"]
 print(f"Camí de la imatge: {image_path}")  # Afegeix això per depurar
 
 if image_path.exists():
-    st.image(str(image_path))
+    st.image(image_path, use_container_width=True)
 else:
     st.error(translations[st.session_state.lang]['error_image_not_found'].format(image=pilot_dia['image']))
     st.write(translations[st.session_state.lang]['image_path_attempted'], image_path)
@@ -132,5 +132,6 @@ if st.button(translations[st.session_state.lang]['show_answer_button']):
 if st.session_state.mostrar_resposta:
     st.info(translations[st.session_state.lang]['answer_reveal'].format(name=pilot_dia['name']))
     st.session_state.mostrar_resposta = False
+
 
 
