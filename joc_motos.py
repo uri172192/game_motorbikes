@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).parent
 translations = {
     'ca': {  # Catalan (original)
         'page_title': "Pilot de Motos del Dia",
-        'title': "🏍️ Repte Pilot del dia 🏍️",
+        'title': "🏍️ Repte Pilot del dia",
         'language_label': "🌐​Idioma",
         'language_options': {"Català": "ca", "English": "en"},
         'error_empty_csv': "Error: pilots.csv està buit o no s'ha trobat.",
@@ -153,6 +153,7 @@ if st.button(translations[st.session_state.lang]['show_answer_button']):
 if st.session_state.mostrar_resposta:
     st.info(translations[st.session_state.lang]['answer_reveal'].format(name=pilot_dia['name']))
     st.session_state.mostrar_resposta = False
+
 
 
 
