@@ -91,10 +91,28 @@ if len(pilots) == 0:
     st.error(translations[st.session_state.lang]['error_empty_csv'])
     st.stop()
 
-seed = dia_del_joc().toordinal()
-random.seed(seed)
-index = random.randint(0, len(pilots) - 1)
-pilot_dia = pilots.iloc[index]
+def obtenir_pilot_del_dia(pilots, dies_bloqueig=15):
+    avui = dia_del_joc()
+    seed_avui = avui.toordinal()
+
+    # calcular els últims pilots dels darrers dies
+    ultims = set()
+
+    for i in range(1, dies_bloqueig + 1):
+        seed_passat = (avui - timedelta(days=i)).toordinal()
+        random.seed(seed_passat)
+        idx = random.randint(0, len(pilots) - 1)
+        ultims.add(idx)
+
+    # generar pilot d'avui evitant repeticions
+    random.seed(seed_avui)
+
+    while True:
+        idx = random.randint(0, len(pilots) - 1)
+        if idx not in ultims:
+            return pilots.iloc[idx]
+
+pilot_dia = obtenir_pilot_del_dia(pilots)
 
 # -------------------------
 # Estat del joc
@@ -135,6 +153,7 @@ if st.button(translations[st.session_state.lang]['show_answer_button']):
 if st.session_state.mostrar_resposta:
     st.info(translations[st.session_state.lang]['answer_reveal'].format(name=pilot_dia['name']))
     st.session_state.mostrar_resposta = False
+
 
 
 
