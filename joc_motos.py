@@ -91,7 +91,7 @@ if len(pilots) == 0:
     st.error(translations[st.session_state.lang]['error_empty_csv'])
     st.stop()
 
-def obtenir_pilot_del_dia(pilots, dies_bloqueig=15):
+def obtenir_pilot_del_dia(pilots, dies_bloqueig=21):
     avui = dia_del_joc()
     seed_avui = avui.toordinal()
 
@@ -153,6 +153,7 @@ if st.button(translations[st.session_state.lang]['show_answer_button']):
 if st.session_state.mostrar_resposta:
     st.info(translations[st.session_state.lang]['answer_reveal'].format(name=pilot_dia['name']))
     st.session_state.mostrar_resposta = False
+
 
 
 
