@@ -49,7 +49,7 @@ translations = {
     'es': {  # Español
         'page_title': "Piloto de Motos del Día",
         'title': "🏍️ Reto Piloto del día",
-        'language_label': "🌐​Lenguaje",
+        'language_label': "🌐​Idioma",
         'language_options': {"Català": "ca", "English": "en","Español":"es"},
         'error_empty_csv': "Error: pilots.csv está vacio o no se ha encontrado.",
         'error_image_not_found': "❌ Imagen no encontrada: {image}",
