@@ -22,7 +22,7 @@ translations = {
         'page_title': "Pilot de Motos del Dia",
         'title': "🏍️ Repte Pilot del dia",
         'language_label': "🌐​Idioma",
-        'language_options': {"Català": "ca", "English": "en"},
+        'language_options': {"Català": "ca", "English": "en", "Español":"es"},
         'error_empty_csv': "Error: pilots.csv està buit o no s'ha trobat.",
         'error_image_not_found': "❌ No s'ha trobat la imatge: {image}",
         'image_path_attempted': "Ruta intentada:",
@@ -36,7 +36,7 @@ translations = {
         'page_title': "Daily Motorcycle Pilot",
         'title': "🏍️ Daily Rider Challenge",
         'language_label': "🌐​Language",
-        'language_options': {"Català": "ca", "English": "en"},
+        'language_options': {"Català": "ca", "English": "en", "Español":"es"},
         'error_empty_csv': "Error: pilots.csv is empty or not found.",
         'error_image_not_found': "❌ Image not found: {image}",
         'image_path_attempted': "Attempted path:",
@@ -45,6 +45,20 @@ translations = {
         'error_wrong_guess': "❌ Incorrect, try again!",
         'show_answer_button': "👀 Show the answer",
         'answer_reveal': "🧠 The correct answer is: **{name}**",
+    },
+    'es': {  # Español
+        'page_title': "Piloto de Motos del Día",
+        'title': "🏍️ Reto Piloto del día",
+        'language_label': "🌐​Lenguaje",
+        'language_options': {"Català": "ca", "English": "en","Español":"es"},
+        'error_empty_csv': "Error: pilots.csv está vacio o no se ha encontrado.",
+        'error_image_not_found': "❌ Imagen no encontrada: {image}",
+        'image_path_attempted': "Ruta intentada:",
+        'guess_placeholder': "🔎 ¿Qué piloto es?",
+        'success_message': "✅ ¡Correcto! ¡Has acertado el piloto del día!",
+        'error_wrong_guess': "❌ ¡Incorrecto! ¡Prueba de nuevo!",
+        'show_answer_button': "👀 Mostrar la respuesta",
+        'answer_reveal': "🧠 La respuesta correcta es: **{name}**",
     }
 }
 
