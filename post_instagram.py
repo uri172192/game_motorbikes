@@ -9,8 +9,8 @@ import random
 # -------------------------
 BASE_DIR = Path(__file__).parent
 
-USERNAME = "el_teu_instagram"
-PASSWORD = "la_teva_password"
+USERNAME = "pilot_motos24h"
+PASSWORD = "pilot_motos24h!"
 
 # -------------------------
 # Funcions
@@ -64,7 +64,22 @@ Saps quin pilot és?
 
 👇 Deixa la teva resposta als comentaris!
 
-#MotoGP #Motorbike #Rider #Moto
+------------------------------------------
+🏍️ RIDER OF THE DAY
+
+Do you know which pilot it is? 
+
+👇 Leave your answer in the comments!
+
+------------------------------------------
+🏍️ PILOTO DEL DÍA
+
+¿Sabes de qué piloto se trata? 
+
+👇 ¡Deja tu respuesta en los comentarios!
+
+
+#MotoGP #Motorbike #Rider #Motos #SBK
 """
 
 # -------------------------
