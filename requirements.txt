@@ -1,8 +1,6 @@
 streamlit
 pandas
-random
 instagrapi
-path
-
+Pillow
 
 
