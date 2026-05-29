@@ -3,14 +3,17 @@ import pandas as pd
 from datetime import datetime, timedelta
 from pathlib import Path
 import random
+import os
 
 # -------------------------
 # Config
 # -------------------------
 BASE_DIR = Path(__file__).parent
 
-USERNAME = "pilot_motos24h"
-PASSWORD = "pilot_motos24h!"
+USERNAME = os.getenv("IG_USERNAME")
+PASSWORD = os.getenv("IG_PASSWORD")
+#USERNAME = "pilot_motos24h"
+#PASSWORD = "pilot_motos24h!"
 
 # -------------------------
 # Funcions
