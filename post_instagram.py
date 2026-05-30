@@ -60,18 +60,19 @@ if not image_path.exists():
 # Instagram client
 # -------------------------
 cl = Client()
+cl.load_settings("session.json")
 
 # 🔑 1. carregar sessió si existeix
-if SESSION_FILE.exists():
-    cl.load_settings(str(SESSION_FILE))
+#if SESSION_FILE.exists():
+#    cl.load_settings(str(SESSION_FILE))
 
 # 🔑 2. login segur
-try:
-    cl.login(USERNAME, PASSWORD)
-    cl.dump_settings(str(SESSION_FILE))  # guarda sessió nova/actualitzada
-except Exception as e:
-    print("Login error:", e)
-    print("Intentant usar sessió existent...")
+#try:
+ #   cl.login(USERNAME, PASSWORD)
+ #   cl.dump_settings(str(SESSION_FILE))  # guarda sessió nova/actualitzada
+#except Exception as e:
+  #  print("Login error:", e)
+   # print("Intentant usar sessió existent...")
 
 # -------------------------
 # 🔧 Fix imatge (IMPORTANT)
@@ -107,6 +108,7 @@ Do you know which rider it is?
 # -------------------------
 # Upload
 # -------------------------
+
 cl.photo_upload(str(fixed_path), caption=caption)
 
 print("Publicació feta!")
