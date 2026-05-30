@@ -60,7 +60,11 @@ if not image_path.exists():
 # Instagram client
 # -------------------------
 cl = Client()
-cl.load_settings("session.json")
+cl.login(
+    os.getenv("IG_USERNAME"),
+    os.getenv("IG_PASSWORD")
+)
+#cl.load_settings("session.json")
 
 # 🔑 1. carregar sessió si existeix
 #if SESSION_FILE.exists():
