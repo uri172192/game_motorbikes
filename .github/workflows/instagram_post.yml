@@ -1,7 +1,10 @@
 name: Instagram Post Bot
 
 on:
-  workflow_dispatch:   # executa manualment (per provar)
+  #workflow_dispatch:   # executa manualment (per provar)
+  schedule:
+    - cron: "0 8 * * *"  # cada dia a les 08:00 UTC
+  workflow_dispatch:     # també manual
 
 jobs:
   post:
