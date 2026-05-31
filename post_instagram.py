@@ -37,7 +37,7 @@ def obtenir_pilot_del_dia(pilots, dies_bloqueig=30):
     while True:
         idx = random.randint(0, len(pilots) - 1)
         if idx not in ultims:
-            return pilots.iloc_idx]
+            return pilots.iloc[idx] 
 
 # -----------------------
 # Carregar dades
@@ -91,7 +91,7 @@ Do you know which rider it is?
 --------------------------
 🏍️ PILOTO DEL DÍA
 
-¿Quién es este piloto?
+¿Por quién es este piloto?
 👇 ¡Déjalo en comentarios!
 
 #MotoGP #SBK #Motorcycle #Riders
