@@ -105,7 +105,7 @@ if len(pilots) == 0:
     st.error(translations[st.session_state.lang]['error_empty_csv'])
     st.stop()
 
-def obtenir_pilot_del_dia(pilots, dies_bloqueig=30):
+def obtenir_pilot_del_dia(pilots, dies_bloqueig=180):
     avui = dia_del_joc()
     seed_avui = avui.toordinal()
 
