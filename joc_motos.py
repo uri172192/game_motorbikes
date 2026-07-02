@@ -4,6 +4,7 @@ from datetime import datetime, timedelta
 import unicodedata
 from pathlib import Path
 import random
+import hashlib
 
 # -------------------------
 # Configuració base
@@ -105,27 +106,33 @@ if len(pilots) == 0:
     st.error(translations[st.session_state.lang]['error_empty_csv'])
     st.stop()
 
-def obtenir_pilot_del_dia(pilots, dies_bloqueig=180):
+def obtenir_pilot_del_dia(pilots):
     avui = dia_del_joc()
-    seed_avui = avui.toordinal()
 
-    # calcular els últims pilots dels darrers dies
-    ultims = set()
+    # Nombre de pilots disponibles
+    n = len(pilots)
 
-    for i in range(1, dies_bloqueig + 1):
-        seed_passat = (avui - timedelta(days=i)).toordinal()
-        random.seed(seed_passat)
-        idx = random.randint(0, len(pilots) - 1)
-        ultims.add(idx)
+    # Dies des d'una data fixa (pots posar la data de llançament de l'app)
+    data_inici = datetime(2025, 12, 24).date()
+    dies_passats = (avui - data_inici).days
 
-    # generar pilot d'avui evitant repeticions
-    random.seed(seed_avui)
+    # Quin cicle estem fent
+    cicle = dies_passats // n
 
-    while True:
-        idx = random.randint(0, len(pilots) - 1)
-        if idx not in ultims:
-            return pilots.iloc[idx]
+    # Quin dia dins del cicle
+    posicio = dies_passats % n
 
+    # Seed única per a cada cicle
+    seed = int(hashlib.sha256(f"pilot-{cicle}".encode()).hexdigest(), 16)
+
+    rng = random.Random(seed)
+
+    indexos = list(range(n))
+    rng.shuffle(indexos)
+
+    idx = indexos[posicio]
+
+    return pilots.iloc[idx]
 pilot_dia = obtenir_pilot_del_dia(pilots)
 
 # -------------------------
