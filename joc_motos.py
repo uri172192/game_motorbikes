@@ -86,9 +86,11 @@ st.session_state.lang = translations[st.session_state.lang]['language_options'][
 # -------------------------
 # Funcions
 # -------------------------
+from zoneinfo import ZoneInfo
+
 def dia_del_joc():
-    ara = datetime.now()
-    if ara.hour < 7:
+    ara = datetime.now(ZoneInfo("Europe/Madrid"))
+    if ara.hour < 8:
         ara -= timedelta(days=1)
     return ara.date()
 
