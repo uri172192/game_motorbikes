@@ -111,30 +111,24 @@ if len(pilots) == 0:
 def obtenir_pilot_del_dia(pilots):
     avui = dia_del_joc()
 
-    # Nombre de pilots disponibles
     n = len(pilots)
 
-    # Dies des d'una data fixa (pots posar la data de llançament de l'app)
     data_inici = datetime(2025, 12, 24).date()
     dies_passats = (avui - data_inici).days
 
-    # Quin cicle estem fent
     cicle = dies_passats // n
-
-    # Quin dia dins del cicle
     posicio = dies_passats % n
 
-    # Seed única per a cada cicle
     seed = int(hashlib.sha256(f"pilot-{cicle}".encode()).hexdigest(), 16)
 
     rng = random.Random(seed)
 
-    indexos = list(range(n))
-    rng.shuffle(indexos)
+    ids = pilots["id"].tolist()
+    rng.shuffle(ids)
 
-    idx = indexos[posicio]
+    id_pilot = ids[posicio]
 
-    return pilots.iloc[idx]
+    return pilots[pilots["id"] == id_pilot].iloc[0]
 pilot_dia = obtenir_pilot_del_dia(pilots)
 
 # -------------------------
