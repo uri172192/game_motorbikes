@@ -52,7 +52,7 @@ translations = {
         'title': "🏍️ Reto Piloto del día",
         'language_label': "🌐​Idioma",
         'language_options': {"Català": "ca", "English": "en","Español":"es"},
-        'error_empty_csv': "Error:  está vacio o no se ha encontrado.",
+        'error_empty_csv': "Error:  pilots.csv está vacio o no se ha encontrado.",
         'error_image_not_found': "❌ Imagen no encontrada: {image}",
         'image_path_attempted': "Ruta intentada:",
         'guess_placeholder': "🔎 ¿Qué piloto es?",
@@ -102,7 +102,7 @@ def normalitza(text):
 # -------------------------
 # Carregar dades
 # -------------------------
-pilots = pd.read_csv(BASE_DIR / "", sep=";")
+pilots = pd.read_csv(BASE_DIR / "pilots.csv", sep=";")
 
 if len(pilots) == 0:
     st.error(translations[st.session_state.lang]['error_empty_csv'])
@@ -190,7 +190,7 @@ if st.session_state.mostrar_resposta:
 
 st.divider()
 
-if st.button("🎲 Prova d'encertar més pilots"):
+if st.button("🎲 Nou pilot"):
 
     st.session_state.pilot_random = obtenir_pilot_random()
 
