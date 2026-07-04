@@ -52,7 +52,7 @@ translations = {
         'title': "🏍️ Reto Piloto del día",
         'language_label': "🌐​Idioma",
         'language_options': {"Català": "ca", "English": "en","Español":"es"},
-        'error_empty_csv': "Error: pilots.csv está vacio o no se ha encontrado.",
+        'error_empty_csv': "Error:  está vacio o no se ha encontrado.",
         'error_image_not_found': "❌ Imagen no encontrada: {image}",
         'image_path_attempted': "Ruta intentada:",
         'guess_placeholder': "🔎 ¿Qué piloto es?",
@@ -102,11 +102,17 @@ def normalitza(text):
 # -------------------------
 # Carregar dades
 # -------------------------
-pilots = pd.read_csv(BASE_DIR / "pilots.csv", sep=";")
+pilots = pd.read_csv(BASE_DIR / "", sep=";")
 
 if len(pilots) == 0:
     st.error(translations[st.session_state.lang]['error_empty_csv'])
     st.stop()
+
+if "ordre_random" not in st.session_state:
+    st.session_state.ordre_random = pilots.sample(frac=1).reset_index(drop=True)
+
+if "index_random" not in st.session_state:
+    st.session_state.index_random = 0
 
 def obtenir_pilot_del_dia(pilots):
     avui = dia_del_joc()
@@ -130,6 +136,17 @@ def obtenir_pilot_del_dia(pilots):
 
     return pilots[pilots["id"] == id_pilot].iloc[0]
 pilot_dia = obtenir_pilot_del_dia(pilots)
+
+def obtenir_pilot_random():
+
+    if st.session_state.index_random >= len(st.session_state.ordre_random):
+        st.session_state.ordre_random = pilots.sample(frac=1).reset_index(drop=True)
+        st.session_state.index_random = 0
+
+    pilot = st.session_state.ordre_random.iloc[st.session_state.index_random]
+    st.session_state.index_random += 1
+
+    return pilot
 
 # -------------------------
 # Estat del joc
@@ -171,10 +188,37 @@ if st.session_state.mostrar_resposta:
     st.info(translations[st.session_state.lang]['answer_reveal'].format(name=pilot_dia['name']))
     st.session_state.mostrar_resposta = False
 
+st.divider()
+
+if st.button("🎲 Prova d'encertar més pilots"):
+
+    st.session_state.pilot_random = obtenir_pilot_random()
 
 
+if "pilot_random" in st.session_state:
 
+    pilot = st.session_state.pilot_random
 
+    st.subheader("Mode pràctica")
+
+    image_path = BASE_DIR / "Fotos" / pilot["image"]
+
+    st.image(image_path, use_container_width=True)
+
+    resposta = st.text_input(
+        "Qui és aquest pilot?",
+        key="guess_random"
+    )
+
+    if resposta:
+
+        if normalitza(resposta) == normalitza(pilot["name"]):
+            st.success("✅ Correcte!")
+        else:
+            st.error("❌ Incorrecte")
+
+    if st.button("👀 Mostrar resposta", key="mostrar_random"):
+        st.info(pilot["name"])
 
 
 
