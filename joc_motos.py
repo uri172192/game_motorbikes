@@ -160,66 +160,106 @@ if "mostrar_resposta" not in st.session_state:
 # -------------------------
 # UI
 # -------------------------
+# -------------------------
+# UI
+# -------------------------
+
 st.title(translations[st.session_state.lang]['title'])
 
-image_path = BASE_DIR / "Fotos" / pilot_dia["image"]
-#print(f"Camí de la imatge: {image_path}")  # Afegeix això per depurar
+tab1, tab2 = st.tabs([
+    "🏍️ Pilot del dia",
+    "🎲 Mode pràctica"
+])
 
-if image_path.exists():
-    st.image(image_path, use_container_width=True)
-else:
-    st.error(translations[st.session_state.lang]['error_image_not_found'].format(image=pilot_dia['image']))
-    st.write(translations[st.session_state.lang]['image_path_attempted'], image_path)
+# =====================================================
+# TAB 1 - PILOT DEL DIA
+# =====================================================
+with tab1:
 
-guess = st.text_input(translations[st.session_state.lang]['guess_placeholder'])
-if guess:
-    if normalitza(guess) == normalitza(pilot_dia["name"]):
-        st.session_state.encertat = True
-        st.success(translations[st.session_state.lang]['success_message'])
-        st.balloons()
-        st.stop()
+    image_path = BASE_DIR / "Fotos" / pilot_dia["image"]
+
+    if image_path.exists():
+        st.image(image_path, use_container_width=True)
     else:
-        st.error(translations[st.session_state.lang]['error_wrong_guess'])
+        st.error(
+            translations[st.session_state.lang]['error_image_not_found'].format(
+                image=pilot_dia["image"]
+            )
+        )
+        st.write(
+            translations[st.session_state.lang]['image_path_attempted'],
+            image_path,
+        )
 
-if st.button(translations[st.session_state.lang]['show_answer_button']):
-    st.session_state.mostrar_resposta = True
-
-if st.session_state.mostrar_resposta:
-    st.info(translations[st.session_state.lang]['answer_reveal'].format(name=pilot_dia['name']))
-    st.session_state.mostrar_resposta = False
-
-st.divider()
-
-if st.button("🎲 Nou pilot"):
-
-    st.session_state.pilot_random = obtenir_pilot_random()
-
-
-if "pilot_random" in st.session_state:
-
-    pilot = st.session_state.pilot_random
-
-    st.subheader("Mode pràctica")
-
-    image_path = BASE_DIR / "Fotos" / pilot["image"]
-
-    st.image(image_path, use_container_width=True)
-
-    resposta = st.text_input(
-        "Qui és aquest pilot?",
-        key="guess_random"
+    guess = st.text_input(
+        translations[st.session_state.lang]['guess_placeholder'],
+        key="guess_dia"
     )
 
-    if resposta:
-
-        if normalitza(resposta) == normalitza(pilot["name"]):
-            st.success("✅ Correcte!")
+    if guess:
+        if normalitza(guess) == normalitza(pilot_dia["name"]):
+            st.success(
+                translations[st.session_state.lang]['success_message']
+            )
+            st.balloons()
         else:
-            st.error("❌ Incorrecte")
+            st.error(
+                translations[st.session_state.lang]['error_wrong_guess']
+            )
 
-    if st.button("👀 Mostrar resposta", key="mostrar_random"):
-        st.info(pilot["name"])
+    if st.button(
+        translations[st.session_state.lang]['show_answer_button'],
+        key="mostrar_resposta_dia"
+    ):
+        st.info(
+            translations[st.session_state.lang]['answer_reveal'].format(
+                name=pilot_dia["name"]
+            )
+        )
 
+# =====================================================
+# TAB 2 - MODE PRÀCTICA
+# =====================================================
+with tab2:
+
+    st.write(
+        "Prem el botó per obtenir un pilot aleatori i intenta endevinar-lo."
+    )
+
+    if st.button("🎲 Nou pilot", key="nou_pilot"):
+
+        st.session_state.pilot_random = obtenir_pilot_random()
+
+        # Esborrem la resposta anterior
+        if "guess_random" in st.session_state:
+            del st.session_state["guess_random"]
+
+    if "pilot_random" in st.session_state:
+
+        pilot = st.session_state.pilot_random
+
+        image_path = BASE_DIR / "Fotos" / pilot["image"]
+
+        if image_path.exists():
+            st.image(image_path, use_container_width=True)
+
+        resposta = st.text_input(
+            "🔎 Quin pilot és?",
+            key="guess_random"
+        )
+
+        if resposta:
+
+            if normalitza(resposta) == normalitza(pilot["name"]):
+                st.success("✅ Correcte!")
+            else:
+                st.error("❌ Incorrecte")
+
+        if st.button(
+            "👀 Mostrar resposta",
+            key="mostrar_random"
+        ):
+            st.info(f"🧠 {pilot['name']}")
 
 
 
