@@ -32,6 +32,18 @@ translations = {
         'error_wrong_guess': "❌ No és correcte, torna-ho a provar!",
         'show_answer_button': "👀 Mostrar la resposta",
         'answer_reveal': "🧠 La resposta correcta és: **{name}**",
+        'tab_daily': "🏍️ Pilot del dia",
+        'tab_practice': "🎲 Mode pràctica",
+
+        'practice_intro': "Prem el botó per obtenir un pilot aleatori i intenta endevinar-lo.",
+        'practice_button': "🎲 Nou pilot",
+        'practice_title': "Mode pràctica",
+        'practice_guess': "🔎 Quin pilot és?",
+
+        'practice_correct': "✅ Correcte!",
+        'practice_wrong': "❌ Incorrecte",
+        'practice_show_answer': "👀 Mostrar resposta",
+        'practice_answer': "🧠 {name}",
     },
     'en': {  # English
         'page_title': "Daily Motorcycle Pilot",
@@ -46,6 +58,18 @@ translations = {
         'error_wrong_guess': "❌ Incorrect, try again!",
         'show_answer_button': "👀 Show the answer",
         'answer_reveal': "🧠 The correct answer is: **{name}**",
+        'tab_daily': "🏍️ Rider of the Day",
+        'tab_practice': "🎲 Practice Mode",
+
+        'practice_intro': "Press the button to get a random rider and try to guess who it is.",
+        'practice_button': "🎲 New rider",
+        'practice_title': "Practice Mode",
+        'practice_guess': "🔎 Which rider is it?",
+
+        'practice_correct': "✅ Correct!",
+        'practice_wrong': "❌ Incorrect",
+        'practice_show_answer': "👀 Show answer",
+        'practice_answer': "🧠 {name}",
     },
     'es': {  # Español
         'page_title': "Piloto de Motos del Día",
@@ -60,6 +84,18 @@ translations = {
         'error_wrong_guess': "❌ ¡Incorrecto! ¡Prueba de nuevo!",
         'show_answer_button': "👀 Mostrar la respuesta",
         'answer_reveal': "🧠 La respuesta correcta es: **{name}**",
+        'tab_daily': "🏍️ Piloto del día",
+        'tab_practice': "🎲 Modo práctica",
+
+        'practice_intro': "Pulsa el botón para obtener un piloto aleatorio e intenta adivinar quién es.",
+        'practice_button': "🎲 Nuevo piloto",
+        'practice_title': "Modo práctica",
+        'practice_guess': "🔎 ¿Qué piloto es?",
+
+        'practice_correct': "✅ ¡Correcto!",
+        'practice_wrong': "❌ Incorrecto",
+        'practice_show_answer': "👀 Mostrar respuesta",
+        'practice_answer': "🧠 {name}",
     }
 }
 
