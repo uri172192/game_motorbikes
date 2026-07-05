@@ -196,15 +196,12 @@ if "mostrar_resposta" not in st.session_state:
 # -------------------------
 # UI
 # -------------------------
-# -------------------------
-# UI
-# -------------------------
 
 st.title(translations[st.session_state.lang]['title'])
 
 tab1, tab2 = st.tabs([
-    "🏍️ Pilot del dia",
-    "🎲 Mode pràctica"
+    translations[st.session_state.lang]['tab_daily'],
+    translations[st.session_state.lang]['tab_practice']
 ])
 
 # =====================================================
@@ -259,10 +256,13 @@ with tab1:
 with tab2:
 
     st.write(
-        "Prem el botó per obtenir un pilot aleatori i intenta endevinar-lo."
-    )
+    translations[st.session_state.lang]['practice_intro']
+)
 
-    if st.button("🎲 Nou pilot", key="nou_pilot"):
+    if st.button(
+    translations[st.session_state.lang]['practice_button'],
+    key="nou_pilot"
+):
 
         st.session_state.pilot_random = obtenir_pilot_random()
 
@@ -280,22 +280,30 @@ with tab2:
             st.image(image_path, use_container_width=True)
 
         resposta = st.text_input(
-            "🔎 Quin pilot és?",
+           translations[st.session_state.lang]['practice_guess'],
             key="guess_random"
         )
 
         if resposta:
 
             if normalitza(resposta) == normalitza(pilot["name"]):
-                st.success("✅ Correcte!")
+                st.success(
+                    translations[st.session_state.lang]['practice_correct']
+                )
             else:
-                st.error("❌ Incorrecte")
+                st.error(
+                    translations[st.session_state.lang]['practice_wrong']
+                )
 
         if st.button(
             "👀 Mostrar resposta",
             key="mostrar_random"
         ):
-            st.info(f"🧠 {pilot['name']}")
+            st.info(
+                translations[st.session_state.lang]['practice_answer'].format(
+                name=pilot["name"]
+            )
+        )
 
 
 
