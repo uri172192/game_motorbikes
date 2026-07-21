@@ -77,16 +77,16 @@ fixed_path = BASE_DIR / "temp_upload.jpg"
 img.save(fixed_path, quality=95)
 
 caption = f"""
-🏍️ PILOT DEL DIA
-
-Saps quin pilot és?
-👇 Respon als comentaris!
-
---------------------------
 🏍️ RIDER OF THE DAY
 
 Do you know which rider it is?
 👇 Comment below!
+
+--------------------------
+🏍️ PILOT DEL DIA
+
+Saps quin pilot és?
+👇 Respon als comentaris!
 
 --------------------------
 🏍️ PILOTO DEL DÍA
