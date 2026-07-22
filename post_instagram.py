@@ -1,17 +1,15 @@
-from instagrapi import Client
 import pandas as pd
 from datetime import datetime, timedelta
 from pathlib import Path
 import random
 import os
 from PIL import Image
+import requests
 
 BASE_DIR = Path(__file__).parent
 
-USERNAME = os.getenv("IG_USERNAME")
-PASSWORD = os.getenv("IG_PASSWORD")
-
-SESSION_FILE = BASE_DIR / "session.json"
+ACCESS_TOKEN = os.getenv("IG_ACCESS_TOKEN")
+IG_BUSINESS_ID = os.getenv("IG_BUSINESS_ID")
 
 # -----------------------
 # Funcions del joc
@@ -45,36 +43,14 @@ def obtenir_pilot_del_dia(pilots, dies_bloqueig=30):
 pilots = pd.read_csv(BASE_DIR / "pilots.csv", sep=";")
 pilot_dia = obtenir_pilot_del_dia(pilots)
 
-image_path = BASE_DIR / "Fotos" / pilot_dia["image"]
+image_url = (
+    "https://uri172192.github.io/game_motorbikes/Fotos/"
+    + pilot_dia["image"]
+)
 
-if not image_path.exists():
-    raise FileNotFoundError(f"No existeix la imatge: {image_path}")
+print(image_url)
 
-# -----------------------
-# Instagram client
-# -----------------------
-cl = Client()
-
-if SESSION_FILE.exists():
-    try:
-        cl.load_settings(str(SESSION_FILE))
-        cl.user_info('me')  # Verificar que la sessió funciona
-        print("Sessió carregada correctament.")
-    except Exception as e:
-        print(f"Error carregant sessió: {e}. Fem login...")
-        cl.login(USERNAME, PASSWORD)
-        cl.dump_settings(str(SESSION_FILE))
-else:
-    print("No s'ha trobat sessió. Fem login...")
-    cl.login(USERNAME, PASSWORD)
-    cl.dump_settings(str(SESSION_FILE))
-
-# -----------------------
-# Arreglar imatge
-# -----------------------
-img = Image.open(image_path).convert("RGB")
-fixed_path = BASE_DIR / "temp_upload.jpg"
-img.save(fixed_path, quality=95)
+# -----------------
 
 caption = f"""
 🏍️ RIDER OF THE DAY
@@ -94,8 +70,36 @@ Saps quin pilot és?
 ¿Por quién es este piloto?
 👇 ¡Déjalo en comentarios!
 
-#MotoGP #SBK #Motorcycle #Riders
+#MotoGP #SBK #moto #riders #motorbikes
 """
 
-cl.photo_upload(str(fixed_path), caption=caption)
-print("Publicació feta!")
+create_url = f"https://graph.facebook.com/v23.0/{IG_BUSINESS_ID}/media"
+
+payload = {
+    "image_url": image_url,
+    "caption": caption,
+    "access_token": ACCESS_TOKEN,
+}
+
+response = requests.post(create_url, data=payload)
+
+print(response.text)
+
+response.raise_for_status()
+
+creation_id = response.json()["id"]
+
+publish_url = f"https://graph.facebook.com/v23.0/{IG_BUSINESS_ID}/media_publish"
+
+payload = {
+    "creation_id": creation_id,
+    "access_token": ACCESS_TOKEN,
+}
+
+response = requests.post(publish_url, data=payload)
+
+print(response.text)
+
+response.raise_for_status()
+
+print("Publicació feta correctament!")
