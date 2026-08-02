@@ -10,7 +10,7 @@ import hashlib
 # -------------------------
 # Configuració base
 # -------------------------
-st.set_page_config(page_title="Pilot de Motos del Dia")
+st.set_page_config(page_title="MotoGuess")
 
 BASE_DIR = Path(__file__).parent
 
@@ -21,8 +21,8 @@ BASE_DIR = Path(__file__).parent
 # Add more languages by adding new top-level keys (e.g., 'es' for Spanish).
 translations = {
     'ca': {  # Catalan (original)
-        'page_title': "Pilot de Motos del Dia",
-        'title': "🏍️ Repte Pilot del dia",
+        'page_title': "MotoGuess",
+        'title': "🏍️ MotoGuess",
         'language_label': "🌐​Idioma",
         'language_options': {"Català": "ca", "English": "en", "Español":"es"},
         'error_empty_csv': "Error: pilots.csv està buit o no s'ha trobat.",
@@ -67,8 +67,8 @@ translations = {
         'repte_timeout': "⏰ S'ha acabat el temps!",
     },
     'en': {  # English
-        'page_title': "Daily Motorcycle Pilot",
-        'title': "🏍️ Daily Rider Challenge",
+        'page_title': "MotoGuess",
+        'title': "🏍️ MOtoGuess",
         'language_label': "🌐​Language",
         'language_options': {"Català": "ca", "English": "en", "Español":"es"},
         'error_empty_csv': "Error: pilots.csv is empty or not found.",
@@ -113,8 +113,8 @@ translations = {
         'repte_timeout': "⏰ Time is up!",
     },
     'es': {  # Español
-        'page_title': "Piloto de Motos del Día",
-        'title': "🏍️ Reto Piloto del día",
+        'page_title': "MotoGuess",
+        'title': "🏍️ MotoGuess",
         'language_label': "🌐​Idioma",
         'language_options': {"Català": "ca", "English": "en","Español":"es"},
         'error_empty_csv': "Error:  pilots.csv está vacio o no se ha encontrado.",
