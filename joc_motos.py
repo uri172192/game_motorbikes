@@ -68,7 +68,7 @@ translations = {
     },
     'en': {  # English
         'page_title': "MotoGuess",
-        'title': "🏍️ MOtoGuess",
+        'title': "🏍️ MotoGuess",
         'language_label': "🌐​Language",
         'language_options': {"Català": "ca", "English": "en", "Español":"es"},
         'error_empty_csv': "Error: pilots.csv is empty or not found.",
@@ -435,66 +435,10 @@ with tab1:
         )
 
 # =====================================================
-# TAB 2 - MODE PRÀCTICA
+# TAB 2 - REPTE 10/10
 # =====================================================
+
 with tab2:
-
-    st.write(
-    translations[st.session_state.lang]['practice_intro']
-)
-
-    if st.button(
-    translations[st.session_state.lang]['practice_button'],
-    key="nou_pilot"
-):
-
-        st.session_state.pilot_random = obtenir_pilot_random()
-
-        # Esborrem la resposta anterior
-        if "guess_random" in st.session_state:
-            del st.session_state["guess_random"]
-
-    if "pilot_random" in st.session_state:
-
-        pilot = st.session_state.pilot_random
-
-        image_path = BASE_DIR / "Fotos" / pilot["image"]
-
-        if image_path.exists():
-            st.image(image_path, width="stretch")
-
-        resposta = st.text_input(
-           translations[st.session_state.lang]['practice_guess'],
-            key="guess_random"
-        )
-
-        if resposta:
-
-            if normalitza(resposta) == normalitza(pilot["name"]):
-                st.success(
-                    translations[st.session_state.lang]['practice_correct']
-                )
-            else:
-                st.error(
-                    translations[st.session_state.lang]['practice_wrong']
-                )
-
-        if st.button(
-            "👀 Mostrar resposta",
-            key="mostrar_random"
-        ):
-            st.info(
-                translations[st.session_state.lang]['practice_answer'].format(
-                name=pilot["name"]
-            )
-        )
-
-
-# =====================================================
-# TAB 3 - REPTE 10/10
-# =====================================================
-
-with tab3:
 
     t = translations[st.session_state.lang]
 
@@ -815,4 +759,58 @@ with tab3:
             st.rerun()
 
 
+# =====================================================
+# TAB 3 - MODE PRÀCTICA
+# =====================================================
+with tab3:
+
+    st.write(
+    translations[st.session_state.lang]['practice_intro']
+)
+
+    if st.button(
+    translations[st.session_state.lang]['practice_button'],
+    key="nou_pilot"
+):
+
+        st.session_state.pilot_random = obtenir_pilot_random()
+
+        # Esborrem la resposta anterior
+        if "guess_random" in st.session_state:
+            del st.session_state["guess_random"]
+
+    if "pilot_random" in st.session_state:
+
+        pilot = st.session_state.pilot_random
+
+        image_path = BASE_DIR / "Fotos" / pilot["image"]
+
+        if image_path.exists():
+            st.image(image_path, width="stretch")
+
+        resposta = st.text_input(
+           translations[st.session_state.lang]['practice_guess'],
+            key="guess_random"
+        )
+
+        if resposta:
+
+            if normalitza(resposta) == normalitza(pilot["name"]):
+                st.success(
+                    translations[st.session_state.lang]['practice_correct']
+                )
+            else:
+                st.error(
+                    translations[st.session_state.lang]['practice_wrong']
+                )
+
+        if st.button(
+            "👀 Mostrar resposta",
+            key="mostrar_random"
+        ):
+            st.info(
+                translations[st.session_state.lang]['practice_answer'].format(
+                name=pilot["name"]
+            )
+        )
 
