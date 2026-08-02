@@ -211,7 +211,7 @@ if "ordre_random" not in st.session_state:
 if "index_random" not in st.session_state:
     st.session_state.index_random = 0
 
-_pilot_del_dia(pilots):
+def obtenir_pilot_del_dia(pilots):
     avui = dia_del_joc()
 
     n = len(pilots)
