@@ -536,13 +536,13 @@ with tab2:
             if correcta:
 
                 st.success(
-                    t['success_message']
+                    t['repte_correct']
                 )
 
             else:
 
                 st.error(
-                    t['error_wrong_guess']
+                    t['repte_wrong']
                 )
 
         # ---------------------------------------------
