@@ -528,13 +528,17 @@ with tab2:
         # RESPOSTA
         # ---------------------------------------------
 
+        # Recuperem el que l'usuari havia escrit en aquesta foto
+        resposta_anterior = st.session_state.repte_respostes[index]
+
         resposta = st.text_input(
             t['guess_placeholder'],
+            value=resposta_anterior,
             key=f"repte_guess_{index}"
         )
 
-        # Guardem la resposta
-        st.session_state.repte_respostes[index] = resposta
+# Guardem la resposta, també si la modifica després
+st.session_state.repte_respostes[index] = resposta
 
         # ---------------------------------------------
         # COMPROVAR RESPOSTA
