@@ -196,6 +196,22 @@ def normalitza(text):
     text = unicodedata.normalize('NFD', text)
     return ''.join(c for c in text if unicodedata.category(c) != 'Mn')
 
+def resposta_correcta(resposta, nom_complet):
+    resposta = normalitza(resposta)
+    parts_nom = normalitza(nom_complet).split()
+
+    if not resposta:
+        return False
+
+    # Accepta el nom complet, el nom o qualsevol cognom
+    opcions_valides = {
+        normalitza(nom_complet),  # p. ex. "marc marquez"
+        parts_nom[0],             # p. ex. "marc"
+        *parts_nom[1:]            # p. ex. "marquez"
+    }
+
+    return resposta in opcions_valides
+
 # -------------------------
 # Carregar dades
 # -------------------------
@@ -526,10 +542,7 @@ with tab2:
 
         if resposta:
 
-            correcta = (
-                normalitza(resposta)
-                == normalitza(pilot["name"])
-            )
+            correcta = resposta_correcta(resposta, pilot["name"])
 
             st.session_state.repte_resultats[index] = correcta
 
