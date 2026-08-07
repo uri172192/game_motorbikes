@@ -537,8 +537,8 @@ with tab2:
             key=f"repte_guess_{index}"
         )
 
-# Guardem la resposta, també si la modifica després
-st.session_state.repte_respostes[index] = resposta
+        # Guardem la resposta, també si la modifica després
+        st.session_state.repte_respostes[index] = resposta
 
         # ---------------------------------------------
         # COMPROVAR RESPOSTA
